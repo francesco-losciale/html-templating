@@ -1,11 +1,13 @@
 (ns html-templating.core
   (:require [selmer.parser :as selmer]
-            [selmer.filters :as filters]))
+            [selmer.filters :as filters]
+            [selmer.middleware :refer [wrap-error-page]]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn renderer []
+  (wrap-error-page
+    (fn [template]
+      {:status 200
+       :body (selmer/render-file template {})})))
 
 ; (selmer/render-file "index.html" {:name "World" :items (range 10) :user {:first "Francesco" :last "Losciale"}})
 
