@@ -12,6 +12,9 @@
 ; (filters/add-filter! :empty? empty?)
 ; (selmer/render "{% if files|empty? %} no files{% else %} files{% endif %}" {:files []})
 
+
+
+
 ; you should always escape user inputs, because it can be malicious. Only server content can be unescaped.
 ; by default, Selmer escapes content but with a filter you can override this mechanism.
 ; Try this:
@@ -26,3 +29,7 @@
 ; (selmer/render "{{x|foo}}" {:x "<div>I'm safe</div>"})
 
 
+
+
+; caveat... templates are moemoized by default. Final version of the template will be compiled and kept in memory.
+; use (selmer/cache-off!) or (selmer/cache-on!) to switch off or on this feature.
