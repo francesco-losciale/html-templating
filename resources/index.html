@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My First Template</title>
+</head>
+<body>
+    <h2>Hello, {{name}}</h2>
+    <p>User name: {{user.first}} {{user.last}}</p>
+    <ul>
+        {% for item in items %}
+        <li>{{item}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+<!--in REPL
+
+(selmer/render-file "index.html" {:name "World" :items (range 10) :user {:first "Francesco" :last "Losciale"}})
+
+-->
