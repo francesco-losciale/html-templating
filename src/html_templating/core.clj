@@ -1,7 +1,28 @@
 (ns html-templating.core
-  (:require [selmer.parser :as selmer]))
+  (:require [selmer.parser :as selmer]
+            [selmer.filters :as filters]))
 
 (defn foo
   "I don't do a whole lot."
   [x]
   (println x "Hello, World!"))
+
+; (selmer/render-file "index.html" {:name "World" :items (range 10) :user {:first "Francesco" :last "Losciale"}})
+
+; (filters/add-filter! :empty? empty?)
+; (selmer/render "{% if files|empty? %} no files{% else %} files{% endif %}" {:files []})
+
+; you should always escape user inputs, because it can be malicious. Only server content can be unescaped.
+; by default, Selmer escapes content but with a filter you can override this mechanism.
+; Try this:
+
+; (selmer/render "{{x}}" {:x "<div>I'm safe</div>"}) ; it returns escaped html
+
+; then add filter
+;(filters/add-filter! :foo
+;                     (fn [x] [:safe (.toUpperCase x)]))
+
+; and try this:
+; (selmer/render "{{x|foo}}" {:x "<div>I'm safe</div>"})
+
+
